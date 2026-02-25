@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California Forest Biomass Resources | Interactive Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            background-color: white;
+            border-bottom: 2px solid #e1e8ed;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            padding: 0 2rem;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #5a6c7d;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-tab:hover {
+            color: #3498db;
+            background-color: #f8f9fa;
+        }
+
+        .nav-tab.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Info Section */
+        .info-section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .info-section h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .info-section p {
+            color: #5a6c7d;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        /* Statistics Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card.blue {
+            background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+        }
+
+        .stat-card.green {
+            background: linear-gradient(135deg, #95E1D3 0%, #38A169 100%);
+        }
+
+        .stat-card.red {
+            background: linear-gradient(135deg, #FF6B6B 0%, #E74C3C 100%);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        /* Visualization Container */
+        .viz-container {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .viz-container h3 {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .viz-container h3::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background: #3498db;
+            margin-right: 1rem;
+            border-radius: 2px;
+        }
+
+        iframe {
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .features-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #5a6c7d;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Resource Cards */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .resource-card h4 {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-detail {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.5rem 0;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .resource-detail:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content p {
+            opacity: 0.8;
+            margin: 0.5rem 0;
+        }
+
+        .footer-links {
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #5dade2;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-tab {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #7f8c8d;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 1rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1>California Forest Biomass Resources</h1>
+            <p class="subtitle">Interactive Analysis & Visualization Platform | 2023 Billion Ton Report</p>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+        <div class="nav-container">
+            <button class="nav-tab active" onclick="showTab('overview')">Overview</button>
+            <button class="nav-tab" onclick="showTab('map')">Resource Map</button>
+            <button class="nav-tab" onclick="showTab('sankey')">End Use Flows</button>
+            <button class="nav-tab" onclick="showTab('data')">Data Details</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <div class="info-section">
+                <h2>Project Overview</h2>
+                <p>This platform provides comprehensive analysis of California's forest biomass waste resources, including processing waste, logging residues, and small-diameter trees. The data represents point-based estimates of biomass availability across California counties, sourced from the 2023 Billion Ton Report.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">3.7M</div>
+                    <div class="stat-label">Total Annual Biomass (dry tonnes/year)</div>
+                </div>
+                <div class="stat-card blue">
+                    <div class="stat-value">45,600</div>
+                    <div class="stat-label">Data Points Analyzed</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Resource Categories</div>
+                </div>
+                <div class="stat-card red">
+                    <div class="stat-value">6</div>
+                    <div class="stat-label">Potential End Uses</div>
+                </div>
+            </div>
+
+            <div class="resource-grid">
+                <div class="resource-card" style="border-left-color: #4ECDC4;">
+                    <h4>🌲 Logging Residues</h4>
+                    <div class="resource-detail">
+                        <span class="detail-label">Annual Amount</span>
+                        <span class="detail-value">2,760,264 tonnes</span>
+                    </div>
+                    <div class="resource-detail">
+                        <span class="detail-label">Share of Total</span>
+                        <span class="detail-value">74.8%</span>
+                    </div>
+                    <div class="resource-detail">
+                        <span class="detail-label">Price Point</span>
+                        <span class="detail-value">$40/tonne</span>
+                    </div>
+                </div>
+
+                <div class="resource-card" style="border-left-color: #F38181;">
+                    <h4>🌳 Small-Diameter Trees</h4>
+                    <div class="resource-detail">
+                        <span class="detail-label">Annual Amount</span>
+                        <span class="detail-value">677,269 tonnes</span>
+                    </div>
+                    <div class="resource-detail">
+                        <span class="detail-label">Share of Total</span>
+                        <span class="detail-value">18.3%</span>
+                    </div>
+                    <div class="resource-detail">
+                        <span class="detail-label">Price Point</span>
+                        <span class="detail-value">$70.11/tonne</span>
+                    </div>
+                </div>
+
+                <div class="resource-card" style="border-left-color: #95E1D3;">
+                    <h4>🍃 Other Forest Waste</h4>
+                    <div class="resource-detail">
+                        <span class="detail-label">Annual Amount</span>
+                        <span class="detail-value">231,199 tonnes</span>
+                    </div>
+                    <div class="resource-detail">
+                        <span class="detail-label">Share of Total</span>
+                        <span class="detail-value">6.3%</span>
+                    </div>
+                    <div class="resource-detail">
+                        <span class="detail-label">Price Point</span>
+                        <span class="detail-value">$50/tonne</span>
+                    </div>
+                </div>
+
+                <div class="resource-card" style="border-left-color: #FF6B6B;">
+                    <h4>🪵 Forest Processing Waste</h4>
+                    <div class="resource-detail">
+                        <span class="detail-label">Annual Amount</span>
+                        <span class="detail-value">23,295 tonnes</span>
+                    </div>
+                    <div class="resource-detail">
+                        <span class="detail-label">Share of Total</span>
+                        <span class="detail-value">0.6%</span>
+                    </div>
+                    <div class="resource-detail">
+                        <span class="detail-label">Price Point</span>
+                        <span class="detail-value">$54/tonne</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>Key Insights</h2>
+                <ul class="features-list">
+                    <li><strong>Logging residues</strong> represent the largest resource category at 2.76 million dry tonnes annually, primarily concentrated in northern California counties</li>
+                    <li><strong>Bioenergy and electricity generation</strong> is the leading end use application, accounting for 36.6% of total potential utilization</li>
+                    <li><strong>Geographic concentration</strong> in Del Norte, Humboldt, and other timber-producing regions indicates infrastructure opportunities</li>
+                    <li><strong>Multiple market scenarios</strong> included (near-term, emerging, mature-market) provide flexibility for planning</li>
+                    <li><strong>High-value applications</strong> like biochemicals and materials represent emerging opportunities, especially for small-diameter trees</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Map Tab -->
+        <div id="map" class="tab-content">
+            <div class="info-section">
+                <h2>Interactive Resource Map</h2>
+                <p>Explore the spatial distribution of forest biomass resources across California. Click on markers to view detailed information about each location, including resource amount, county, scenario, and pricing.</p>
+                <ul class="features-list">
+                    <li>Toggle different resource types using the layer control in the top-right corner</li>
+                    <li>Marker size represents the amount of available biomass</li>
+                    <li>Color coding: Teal (Logging Residues), Pink (Small-Diameter Trees), Light Green (Other Waste), Red (Processing Waste)</li>
+                    <li>Zoom and pan to explore specific regions</li>
+                </ul>
+            </div>
+
+            <div class="viz-container">
+                <h3>California Forest Biomass Resource Locations</h3>
+                <iframe src="california_forest_biomass_map.html" height="800px"></iframe>
+            </div>
+        </div>
+
+        <!-- Sankey Tab -->
+        <div id="sankey" class="tab-content">
+            <div class="info-section">
+                <h2>Biomass Flow to End Uses</h2>
+                <p>This Sankey diagram visualizes how California's forest biomass resources could flow into various end-use applications. The width of each flow represents the volume of biomass in dry tonnes per year.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card" style="background: linear-gradient(135deg, #FFA07A 0%, #FF6347 100%);">
+                    <div class="stat-value">1.35M</div>
+                    <div class="stat-label">Bioenergy & Electricity (36.6%)</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);">
+                    <div class="stat-value">717K</div>
+                    <div class="stat-label">Heat & Thermal Energy (19.4%)</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #DDA15E 0%, #BC6C25 100%);">
+                    <div class="stat-value">668K</div>
+                    <div class="stat-label">Wood Pellets (18.1%)</div>
+                </div>
+                <div class="stat-card" style="background: linear-gradient(135deg, #90EE90 0%, #228B22 100%);">
+                    <div class="stat-value">507K</div>
+                    <div class="stat-label">Biofuels Production (13.7%)</div>
+                </div>
+            </div>
+
+            <div class="viz-container">
+                <h3>Interactive Flow Diagram</h3>
+                <iframe src="biomass_sankey_diagram.html" height="800px"></iframe>
+            </div>
+
+            <div class="info-section">
+                <h2>End Use Applications</h2>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <h4>⚡ Bioenergy & Electricity</h4>
+                        <p style="color: #5a6c7d; margin-top: 0.5rem;">Direct combustion for electricity generation and combined heat and power (CHP) facilities.</p>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🔥 Heat & Thermal Energy</h4>
+                        <p style="color: #5a6c7d; margin-top: 0.5rem;">District heating systems, industrial process heat, and residential heating applications.</p>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🔶 Wood Pellets</h4>
+                        <p style="color: #5a6c7d; margin-top: 0.5rem;">Compressed biomass pellets for heating and power generation, with export potential.</p>
+                    </div>
+                    <div class="resource-card">
+                        <h4>⛽ Biofuels</h4>
+                        <p style="color: #5a6c7d; margin-top: 0.5rem;">Advanced biofuels including cellulosic ethanol, biodiesel, and sustainable aviation fuel.</p>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🌱 Biochar & Soil Amendments</h4>
+                        <p style="color: #5a6c7d; margin-top: 0.5rem;">Carbon-negative products for soil improvement and carbon sequestration.</p>
+                    </div>
+                    <div class="resource-card">
+                        <h4>🧪 Biochemicals & Materials</h4>
+                        <p style="color: #5a6c7d; margin-top: 0.5rem;">High-value products including bio-based chemicals, composite materials, and novel biomaterials.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Tab -->
+        <div id="data" class="tab-content">
+            <div class="info-section">
+                <h2>Data Sources & Methodology</h2>
+                <p><strong>Primary Data Source:</strong> 2023 Billion Ton Report by the U.S. Department of Energy</p>
+                <p><strong>Dataset URL:</strong> <a href="https://bioenergykdf.net/bt23-data-portal" target="_blank" style="color: #3498db;">https://bioenergykdf.net/bt23-data-portal</a></p>
+                <p><strong>Coverage:</strong> California statewide</p>
+                <p><strong>Total Records:</strong> 45,600 data points</p>
+            </div>
+
+            <div class="info-section">
+                <h2>Dataset Details</h2>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <h4>Forest Processing Waste</h4>
+                        <div class="resource-detail">
+                            <span class="detail-label">Records</span>
+                            <span class="detail-value">1,800</span>
+                        </div>
+                        <div class="resource-detail">
+                            <span class="detail-label">Resource Type</span>
+                            <span class="detail-value">Softwood processing residues</span>
+                        </div>
+                        <div class="resource-detail">
+                            <span class="detail-label">Scenario</span>
+                            <span class="detail-value">Near-term</span>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>Logging Residues</h4>
+                        <div class="resource-detail">
+                            <span class="detail-label">Records</span>
+                            <span class="detail-value">30,180</span>
+                        </div>
+                        <div class="resource-detail">
+                            <span class="detail-label">Resource Type</span>
+                            <span class="detail-value">Planted & natural residues</span>
+                        </div>
+                        <div class="resource-detail">
+                            <span class="detail-label">Scenarios</span>
+                            <span class="detail-value">Multiple (5 scenarios)</span>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>Other Forest Waste</h4>
+                        <div class="resource-detail">
+                            <span class="detail-label">Records</span>
+                            <span class="detail-value">5,700</span>
+                        </div>
+                        <div class="resource-detail">
+                            <span class="detail-label">Resource Type</span>
+                            <span class="detail-value">Human-generated waste</span>
+                        </div>
+                        <div class="resource-detail">
+                            <span class="detail-label">Scenario</span>
+                            <span class="detail-value">Emerging</span>
+                        </div>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>Small-Diameter Trees</h4>
+                        <div class="resource-detail">
+                            <span class="detail-label">Records</span>
+                            <span class="detail-value">7,920</span>
+                        </div>
+                        <div class="resource-detail">
+                            <span class="detail-label">Resource Type</span>
+                            <span class="detail-value">Natural small-diameter trees</span>
+                        </div>
+                        <div class="resource-detail">
+                            <span class="detail-label">Scenario</span>
+                            <span class="detail-value">Mature-market medium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h2>Data Fields</h2>
+                <p>Each record in the dataset contains the following information:</p>
+                <ul class="features-list">
+                    <li><strong>Geographic coordinates:</strong> Latitude and longitude for spatial analysis</li>
+                    <li><strong>Administrative units:</strong> State, county name, and FIPS codes</li>
+                    <li><strong>Resource characteristics:</strong> Type, specific resource classification, and annual amount</li>
+                    <li><strong>Economic data:</strong> Resource price per dry tonne</li>
+                    <li><strong>Scenario information:</strong> Future market scenarios (near-term, emerging, mature-market)</li>
+                    <li><strong>Units:</strong> All resource amounts measured in dry tonnes per year</li>
+                    <li><strong>Metadata:</strong> Data source and URL for verification</li>
+                </ul>
+            </div>
+
+            <div class="info-section">
+                <h2>Technical Notes</h2>
+                <p><strong>Visualization Methodology:</strong> For performance optimization, the interactive map displays the top 500 highest-concentration points for each resource category. This represents the most significant biomass sources while maintaining responsive performance.</p>
+                <p><strong>End Use Allocation:</strong> The Sankey diagram shows potential allocation percentages based on typical biomass utilization patterns and market demands. Actual allocation would depend on infrastructure, market conditions, and policy frameworks.</p>
+                <p><strong>Data Currency:</strong> This analysis is based on the 2023 Billion Ton Report. Users should verify current data availability and updates from the source.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p><strong>California Forest Biomass Resources Analysis</strong></p>
+            <p>Data Source: 2023 Billion Ton Report | U.S. Department of Energy</p>
+            <div class="footer-links">
+                <a href="https://bioenergykdf.net/bt23-data-portal" target="_blank">View Source Data</a>
+                <a href="https://www.energy.gov/eere/bioenergy/2023-billion-ton-report" target="_blank">About Billion Ton Report</a>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                © 2026 - Interactive visualization platform for California forest biomass analysis
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Add smooth scroll behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('California Forest Biomass Platform loaded successfully');
+        });
+    </script>
+</body>
+</html>
