@@ -1,0 +1,48 @@
+Biomass_Code,Biomass_Type,NULL,NULL.1,Building_Code,Value,NULL.2,NULL.3,Column_Code,Definition
+M,Manure,,,Sm,Small MUD,,,_wetad_,tagged for wet AD suitable
+B,Bedding,,,Med,Medium MUD,,,_dryad_,tagged for dry AD suitable
+clf,Calf,,,Lg,Large MUD,,,_th_,tagged for thermo-chem suitable
+dy,Dairy,,,tot,Total; all MUD,,,_wt,wet tonnes unit replacing bdt
+bf,Beef,,,C,Cooling kWh/yr,,,_tech,technical potential
+hg,Hog,,,H,Heating kWh/yr,,,_lg_,tagged for woody/lignin
+lr,Layer,,,CG,Cogen Capacity,,,_hr_,tagged for herbacious
+pl,Pullet,,,MUD,Mixed Use Development,,,wet,tagged for wet biomass
+br,Broiler,,,PH,Process Heating kWh/y,,,dry,tagged for dry biomass
+tk,Turkey,,,PC,Process Cooling kWh/y,,,,
+gt,Goat,,,,,,,,
+sh,"Sheep, Lambs",,,,,,,,
+eq,Equine,,,,,,,,
+dk,"Mules, Burros, Donkeys",,,,,,,,
+MSW,Municipal Solid Waste,,,,,,,,
+lb,Lumber,,,,,,,,
+pp,Paper,,,,,,,,
+cd,Cardboard,,,,,,,,
+gn,Green,,,,,,,,
+fd,Food,,,,,,,,
+FOG,"Fats, Oils, Grease",,,,,,,,
+ot,Other,,,,,,,,
+Bsld,Biosolids,,,,,,,,
+RES,Crop Residue,,,,,,,,
+CULL,Crop Cull,,,,,,,,
+Field,Field,,,,,,,,
+Row,Row,,,,,,,,
+Orchard,Orchard,,,,,,,,
+PLMS,Processor Residue low moisture solids,,,,,,,,
+PHMS,Processor Residue high moisture solids,,,,,,,,
+cn,CANNERY,,,,,,,,
+deh,DEHYD.,,,,,,,,
+ff,FRESH/FROZ.,,,,,,,,
+wn,WINERY,,,,,,,,
+bry,BREWERY,,,,,,,,
+dst,DISTILLERY,,,,,,,,
+rm,RED MEAT,,,,,,,,
+pm,POULTRY MEAT,,,,,,,,
+ah,ALMOND HULLS,,,,,,,,
+as,ALMOND SHELLS,,,,,,,,
+ws,WALNUT SHELLS,,,,,,,,
+otns,OTHER NUT SHELLS,,,,,,,,
+rh,RICE HULLS,,,,,,,,
+cgt,COTTON GIN TRASH,,,,,,,,
+bky,BAKERY,,,,,,,,
+tll,TORTILLA,,,,,,,,
+grc,GRAIN CHAFF,,,,,,,,

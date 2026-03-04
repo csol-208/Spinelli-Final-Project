@@ -1,0 +1,50 @@
+Unnamed: 0,Animal Weight [lb],Lorimor et al. 2004,ASAE 2005,Williams et al. 2015
+Dairy Calf small,150.0,12.0,,
+Dairy Calf large,250.0,20.0,,
+Dairy Calf large,330.0,,19.0,
+Dairy Heifer small,750.0,45.0,,
+Dairy Heifer medium,970.0,,48.0,50.0
+Dairy Heifer large,1000.0,60.0,,
+Dairy Lactating small,1000.0,111.0,83.0,
+Dairy Lactating large,1400.0,155.0,,140.0
+Dairy Dry Small,1000.0,51.0,,
+Dairy Dry Medium,1400.0,71.0,,
+Dairy Dry Large,1700.0,87.0,,
+Dairy Veal,250.0,6.6,,
+"Dry Beef Calf (confined, small)",450.0,48.0,50.0,
+"Dry Beef Calf (confined, large) (veal)",650.0,9.0,7.8,
+Dry Beef Finishing small,750.0,37.0,,
+Dry Beef Finishing large,1100.0,54.0,64.0,
+Dry Beef Cow (confined),1000.0,92.0,,125.0
+Dry Beef Other Cattle (Cow Replacements & Heifers),,,50.0,50.0
+Swine,,,,
+Nursery small,25.0,1.9,2.4,
+Nursery large,40.0,3.0,,
+Finishing small,150.0,7.4,10.0,
+Finishing small-medium,180.0,8.9,,
+Finishing medium,220.0,10.9,,10.0
+Finishing medium-large,260.0,12.8,,
+Finishing Large,300.0,14.8,,
+Gestating small,300.0,6.8,,
+Gestating medium,400.0,9.1,,
+Gestating medium,440.0,,11.0,
+Gestating large,500.0,11.4,,
+Lactating small,375.0,17.5,,
+Lactating small,423.0,,25.0,
+Lactating medium,500.0,23.4,,
+Lactating large,600.0,28.1,,
+Boar small,300.0,0.2,,
+Boar medium,400.0,8.2,,
+Boar medium,440.0,,8.4,
+Boar large,500.0,10.3,,
+Poultry (Layers Chickens),3.0,0.15,0.19,0.2
+Poultry (Broiler Chickens),2.0,0.19,0.23,0.22
+Turkey (female),10.0,0.47,0.36,
+Turkey (male),20.0,0.74,0.59,0.58
+Ducks,4.0,0.44,0.36,
+Feeder lamb,100.0,4.1,,
+Goats,,,,
+Horse Sedentary,1100.0,,56.0,
+Horse Sedentary,1000.0,54.4,,
+Horse Intense Exercise,1000.0,55.5,,
+Horse Intense Exercise,1100.0,,57.0,
