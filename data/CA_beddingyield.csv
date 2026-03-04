@@ -1,0 +1,16 @@
+Bedding Material,Density [kg/m3],Yield [kg/bird/year]
+Loose straw,40,5
+Loose wood shavings,144,18
+Loose sawdust,192,24
+Loose non-legume hay,64,8
+Loose alfalfa,64,8
+Loose legume hay,68,8
+Chopped newspaper,224,28
+Chopped straw,112,14
+Chopped non-legume hay,96,12
+Chopped alfalfa,96,12
+Chopped legume hay,104,13
+Baled straw,80,10
+Baled wood shavings,320,39
+Baled non-legume hay,112,14
+Baled alfalfa,128,16
