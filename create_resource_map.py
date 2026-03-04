@@ -14,7 +14,8 @@ data_files = {
     'Forest Processing Waste': 'data/CA_forest_processing_waste_points_BillionTonReport.csv',
     'Logging Residues': 'data/CA_logging_residues_points_BillionTonReport.csv',
     'Other Forest Waste': 'data/CA_other_forest_waste_points_BillionTonReport.csv',
-    'Small-Diameter Trees': 'data/CA_small-diameter_trees_points_BillionTonReport.csv'
+    'Small-Diameter Trees': 'data/CA_small-diameter_trees_points_BillionTonReport.csv',
+    'Paper & Paperboard': 'CA_paper_points_BillionTonReport.csv'
 }
 
 # Define colors for each resource type
@@ -22,7 +23,8 @@ colors = {
     'Forest Processing Waste': '#FF6B6B',  # Red
     'Logging Residues': '#4ECDC4',          # Teal
     'Other Forest Waste': '#95E1D3',        # Light green
-    'Small-Diameter Trees': '#F38181'       # Pink
+    'Small-Diameter Trees': '#F38181',      # Pink
+    'Paper & Paperboard': '#FFA500'         # Orange
 }
 
 print("Loading data files...")

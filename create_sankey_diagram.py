@@ -12,7 +12,8 @@ data_files = {
     'Forest Processing Waste': 'data/CA_forest_processing_waste_points_BillionTonReport.csv',
     'Logging Residues': 'data/CA_logging_residues_points_BillionTonReport.csv',
     'Other Forest Waste': 'data/CA_other_forest_waste_points_BillionTonReport.csv',
-    'Small-Diameter Trees': 'data/CA_small-diameter_trees_points_BillionTonReport.csv'
+    'Small-Diameter Trees': 'data/CA_small-diameter_trees_points_BillionTonReport.csv',
+    'Paper & Paperboard': 'CA_paper_points_BillionTonReport.csv'
 }
 
 print("Loading data files...")
@@ -43,37 +44,43 @@ end_uses = {
         'Forest Processing Waste': 0.35,
         'Logging Residues': 0.40,
         'Other Forest Waste': 0.30,
-        'Small-Diameter Trees': 0.25
+        'Small-Diameter Trees': 0.25,
+        'Paper & Paperboard': 0.20
     },
     'Heat & Thermal Energy': {
         'Forest Processing Waste': 0.25,
         'Logging Residues': 0.20,
         'Other Forest Waste': 0.25,
-        'Small-Diameter Trees': 0.15
+        'Small-Diameter Trees': 0.15,
+        'Paper & Paperboard': 0.15
     },
     'Wood Pellets': {
         'Forest Processing Waste': 0.20,
         'Logging Residues': 0.15,
         'Other Forest Waste': 0.20,
-        'Small-Diameter Trees': 0.30
+        'Small-Diameter Trees': 0.30,
+        'Paper & Paperboard': 0.10
     },
     'Biofuels (Ethanol/Biodiesel)': {
         'Forest Processing Waste': 0.10,
         'Logging Residues': 0.15,
         'Other Forest Waste': 0.10,
-        'Small-Diameter Trees': 0.10
+        'Small-Diameter Trees': 0.10,
+        'Paper & Paperboard': 0.15
     },
     'Biochar & Soil Amendments': {
         'Forest Processing Waste': 0.05,
         'Logging Residues': 0.05,
         'Other Forest Waste': 0.10,
-        'Small-Diameter Trees': 0.05
+        'Small-Diameter Trees': 0.05,
+        'Paper & Paperboard': 0.05
     },
     'Biochemicals & Materials': {
         'Forest Processing Waste': 0.05,
         'Logging Residues': 0.05,
         'Other Forest Waste': 0.05,
-        'Small-Diameter Trees': 0.15
+        'Small-Diameter Trees': 0.15,
+        'Paper & Paperboard': 0.35
     }
 }
 
@@ -89,7 +96,8 @@ resource_colors = {
     'Forest Processing Waste': '#FF6B6B',
     'Logging Residues': '#4ECDC4',
     'Other Forest Waste': '#95E1D3',
-    'Small-Diameter Trees': '#F38181'
+    'Small-Diameter Trees': '#F38181',
+    'Paper & Paperboard': '#FFA500'
 }
 
 end_use_colors = {
