@@ -23,11 +23,18 @@ def clean_numeric(value):
             return 0
     return float(value)
 
-def analyze_county_file(filepath, skip_first_col=True):
+def analyze_county_file(filepath, skip_first_col=True, total_col_only=False):
     """Analyze a county-level gross file and return total"""
     try:
         df = pd.read_csv(filepath)
-        # Skip the first column (usually COUNTY) and sum all numeric data
+        
+        # For processing files, just use the TOTAL column (second column)
+        if total_col_only and len(df.columns) > 1:
+            # Get the total from the "Total" row (second to last row)
+            total_value = clean_numeric(df.iloc[-2, 1])  # Total row, second column
+            return total_value
+        
+        # For other files, skip the first column (usually COUNTY) and sum all numeric data
         total = 0
         for col in df.columns[1 if skip_first_col else 0:]:
             if 'Unnamed' not in col and col not in ['Scenario', 'NULL']:
@@ -130,7 +137,7 @@ def main():
     proc_total = 0
     for name, filepath in proc_files.items():
         if os.path.exists(filepath):
-            total = analyze_county_file(filepath)
+            total = analyze_county_file(filepath, total_col_only=True)
             proc_total += total
             results[name] = total
             print(f"  {name:.<40} {total:>15,.0f} dry tonnes/year")
